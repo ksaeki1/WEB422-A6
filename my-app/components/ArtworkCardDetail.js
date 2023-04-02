@@ -4,7 +4,9 @@ import { Button, Card } from "react-bootstrap";
 // A5 Step 3
 import { useAtom } from "jotai";
 import { favouritesAtom } from "@/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// A6 part 4
+import { addToFavourites, removeFromFavourites } from "@/lib/userData";
 
 export default function ArtworkCardDetail({ objectID }) {
   // accepts a single objectID prop
@@ -16,26 +18,30 @@ export default function ArtworkCardDetail({ objectID }) {
       ? `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
       : null
   );
-
   // A5 Step 3
   const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
-  const [showAdded, setShowAdded] = useState(
-    favouritesList.includes(+objectID) ? true : false
-  );
+  const [showAdded, setShowAdded] = useState(false)  // A6 Step 4
+  // A6 Step 4
+  useEffect(()=>{
+    setShowAdded(favouritesList?.includes(objectID))
+    }, [favouritesList])
+
+//   useState(
+//     favouritesList.includes(+objectID) ? true : false
+//   );
   // passed objectID (props) is a string while favouritesList contains number
 //   console.log(`+++ show added = ${showAdded}`);
   //   console.log(`-----showAdded - includes ${typeof +objectID}  ${favouritesList.includes(+{objectID})}`);
 
   // A5 Step 3
-  function favouritesClicked(objectID) {
+  // A6 Step 4 - made it async
+  async function favouritesClicked(objectID) {
     console.log("-- Favourite button clicked");
     // console.log(`-- ObjectID:  ${objectID}`);
     if (showAdded) {
-      setFavouritesList((current) => current.filter((fav) => fav != objectID)); // return a list without objectID
-      setShowAdded(false);
+        setFavouritesList(await removeFromFavourites(objectID))
     } else {
-      setFavouritesList((current) => [...current, objectID]); // like append. current + objectID
-      setShowAdded(true);
+      setFavouritesList(await addToFavourites(objectID));
     }
     // console.log(favouritesList);
   }

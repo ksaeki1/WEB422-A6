@@ -106,7 +106,7 @@ export async function addToFavourites(id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/history/`,
       {
-        method: "DELETE",
+        method: "GET",
         headers: {
           Authorization : `JWT ${getToken()}`,
         },

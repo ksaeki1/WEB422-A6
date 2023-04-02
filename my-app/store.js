@@ -3,7 +3,9 @@
 
 import { atom } from 'jotai'
 
-export const favouritesAtom = atom([])
+// A6 Step 4
+export const favouritesAtom = atom()
 
 // A5 Step 6
-export const searchHistoryAtom = atom([])
+// A6 Step 5: removed []
+export const searchHistoryAtom = atom()

@@ -16,7 +16,6 @@ export async function registerUser(user, password, password2) {
         },
       });
     
-
       const data = await res.json();
     
       if (res.status === 200) {
@@ -40,6 +39,7 @@ export async function authenticateUser(user, password) {
     });
     console.log(res);
     const data = await res.json();
+    console.log(data);
     if (res.status === 200) {
       setToken(data.token);
       return true;

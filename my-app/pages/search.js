@@ -6,6 +6,8 @@ import { Button, Col, Row } from "react-bootstrap";
 // A5 Step 6
 import { useAtom } from "jotai";
 import { searchHistoryAtom } from "@/store";
+// A6 Step 5
+import { addToHistory } from "@/lib/userData";
 
 export default function AdvancedSearch() {
   const router = useRouter();
@@ -14,8 +16,7 @@ export default function AdvancedSearch() {
 
   // A5 Step 6
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom)
-
-  function submitForm(data) {
+  async function submitForm(data) {
     const queryString = [];
 
     // append
@@ -40,8 +41,10 @@ export default function AdvancedSearch() {
     console.log(queryString.join(''));
     router.push(`/artwork?${queryString.join('')}`);
 
+    // A6 Step 5
+    setSearchHistory(await addToHistory(queryString))
     // A5 Step 6
-    setSearchHistory(current => [...current, queryString.join('')]); // like append. current + queryString
+    // setSearchHistory(current => [...current, queryString.join('')]); // like append. current + queryString
 
   }
 
