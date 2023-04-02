@@ -5,6 +5,8 @@
 * (including web sites) or distributed to other students. 
 * 
 * Name: Koji Saeki Student ID: 148443203 Date: 2023-03-31 
+*
+* Vercel App (Deployed) Link: https://my-app-r6hz.vercel.app/
 * 
 *******************************************************************************************/
 // npx create-next-app my-app --use-npm - No, Yes, No, No, @
