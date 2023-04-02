@@ -7,6 +7,7 @@ import { favouritesAtom } from "@/store";
 import { useEffect, useState } from "react";
 // A6 part 4
 import { addToFavourites, removeFromFavourites } from "@/lib/userData";
+import Error from "next/error";
 
 export default function ArtworkCardDetail({ objectID }) {
   // accepts a single objectID prop
